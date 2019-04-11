@@ -4,8 +4,7 @@ import HelloWorld from '@/components/HelloWorld'
 import Add from '@/components/Add'
 
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
   mode: 'history',
   routes: [
     {
@@ -20,3 +19,12 @@ export default new Router({
     }
   ]
 })
+router.beforeEach((to, from, next) => {
+  console.log(to, from)
+  if (to.matched.length === 0) {
+    window.location.href = '/login.html'
+  } else {
+    next()
+  }
+})
+export default router
